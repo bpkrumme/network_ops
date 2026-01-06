@@ -1,0 +1,16 @@
+---
+- name: Get info about subnet from phpIPAM
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Get subnet info based on CIDR
+      kenmoini.phpipam.subnet_info:
+        cidr: "{{ cidr }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+      register: subnet_info
+
+    - name: Show the info
+      ansible.builtin.debug:
+        var: subnet_info

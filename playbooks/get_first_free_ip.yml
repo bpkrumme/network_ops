@@ -1,0 +1,16 @@
+---
+- name: Get the first free IP address from phpIPAM
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Get the first free IP from a subnet
+      kenmoini.phpipam.first_free_address:
+        subnet_id: "{{ subnet_id }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+      register: ip_data
+
+    - name: Show IP ip_data
+      ansible.builtin.debug:
+        var: ip_data
