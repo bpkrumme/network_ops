@@ -9,8 +9,10 @@
         phpipam_url: "{{ phpipam_url }}"
         phpipam_app_id: "{{ phpipam_app_id }}"
         phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
       register: subnet_info
 
     - name: Show the info
       ansible.builtin.debug:
-        var: subnet_info
+        var: subnet_info['subnet_info'][0]['id']
+

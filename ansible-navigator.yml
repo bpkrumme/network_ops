@@ -8,8 +8,7 @@ ansible-navigator:
     container-engine: auto
     enabled: true
     pull:
-      policy: always
+      policy: missing
     image: production-aap.apps.ocp.bk.lab/homelab_ees/network_ee:latest
   playbook-artifact:
-    enable: true
-    save-as: artifacts/{playbook_name}-artifact-{time_stamp}.json
+    enable: false

@@ -9,6 +9,7 @@
         phpipam_url: "{{ phpipam_url }}"
         phpipam_app_id: "{{ phpipam_app_id }}"
         phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
       register: ip_data
 
     - name: Show IP ip_data

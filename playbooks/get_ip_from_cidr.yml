@@ -1,0 +1,27 @@
+---
+- name: Get the first free ip based on CIDR
+  hosts: localhost
+  become: false
+  tasks:
+    - name: Get subnet info based on CIDR
+      kenmoini.phpipam.subnet_info:
+        cidr: "{{ cidr }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
+      register: subnet_info
+
+    - name: Get the first free IP from a subnet
+      kenmoini.phpipam.first_free_address:
+        subnet_id: "{{ subnet_info['subnet_info'][0]['id'] }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
+      register: ip_data
+
+    - name: Show the IP
+      ansible.builtin.debug:
+        var: ip_data['ip_address']
+
