@@ -1,0 +1,33 @@
+---
+- name: GReserve an IP in a CIDR block
+  hosts: localhost
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Get subnet info based on CIDR
+      kenmoini.phpipam.subnet_info:
+        cidr: "{{ cidr }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
+      register: subnet_info
+
+    - name: Get the first free IP from the subnet
+      kenmoini.phpipam.first_free_address:
+        subnet_id: "{{ subnet_info['subnet_info'][0]['id'] }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
+      register: ip_data
+
+    - name: Reserve the IP address
+      kenmoini.phpipam.reserve_address:
+        subnet_id: "{{ subnet_info['subnet_info'][0]['id'] }}"
+        hostname: "{{ vm_name }}"
+        ip: "{{ ip_data['ip_address'] }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
