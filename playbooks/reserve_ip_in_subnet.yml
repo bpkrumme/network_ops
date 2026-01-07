@@ -1,5 +1,5 @@
 ---
-- name: GReserve an IP in a CIDR block
+- name: Reserve an IP in a CIDR block
   hosts: localhost
   become: false
   gather_facts: false
