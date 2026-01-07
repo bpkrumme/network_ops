@@ -1,0 +1,23 @@
+---
+- name: Release an IP in a CIDR block
+  hosts: localhost
+  become: false
+  gather_facts: false
+  tasks:
+    - name: Get subnet info based on CIDR
+      kenmoini.phpipam.subnet_info:
+        cidr: "{{ cidr }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
+      register: subnet_info
+
+    - name: Reserve the IP address
+      kenmoini.phpipam.reserve_address:
+        subnet_id: "{{ subnet_info['subnet_info'][0]['id'] }}"
+        ip: "{{ ip_address }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
