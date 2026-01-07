@@ -2,6 +2,7 @@
 - name: Get the first free ip based on CIDR
   hosts: localhost
   become: false
+  gather_facts: false
   tasks:
     - name: Get subnet info based on CIDR
       kenmoini.phpipam.subnet_info:

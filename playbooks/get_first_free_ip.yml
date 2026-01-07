@@ -2,6 +2,7 @@
 - name: Get the first free IP address from phpIPAM
   hosts: localhost
   become: false
+  gather_facts: false
   tasks:
     - name: Get the first free IP from a subnet
       kenmoini.phpipam.first_free_address:
