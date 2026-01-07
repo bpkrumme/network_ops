@@ -15,7 +15,7 @@
 
     - name: See IP info
       ansible.builtin.debug:
-        var: address_info['address_info']['id']
+        var: address_info['address_info'][0]['id']
 
 #    - name: Release the IP address
 #      kenmoini.phpipam.reserve_address:
