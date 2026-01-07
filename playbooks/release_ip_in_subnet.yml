@@ -17,11 +17,11 @@
       ansible.builtin.debug:
         var: address_info['address_info'][0]['id']
 
-#    - name: Release the IP address
-#      kenmoini.phpipam.reserve_address:
-#        subnet_id: "{{ subnet_info['subnet_info'][0]['id'] }}"
-#        ip_id: "{{ address_info['something'] }}"
-#        phpipam_url: "{{ phpipam_url }}"
-#        phpipam_app_id: "{{ phpipam_app_id }}"
-#        phpipam_app_code: "{{ phpipam_app_code }}"
-#        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
+    - name: Release the IP address
+      kenmoini.phpipam.release_address:
+        subnet_id: "{{ address_info['address_info'][0]['subnetId'] }}"
+        ip_id: "{{ address_info['address_info'][0]['id'] }}"
+        phpipam_url: "{{ phpipam_url }}"
+        phpipam_app_id: "{{ phpipam_app_id }}"
+        phpipam_app_code: "{{ phpipam_app_code }}"
+        phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
