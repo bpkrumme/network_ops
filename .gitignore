@@ -172,6 +172,8 @@ cython_debug/
 
 # Ansible-specific
 .ansible
+ansible-navigator.log
+
 
 # Added to keep data private
 ansible.cfg
