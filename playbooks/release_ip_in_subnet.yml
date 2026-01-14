@@ -13,10 +13,6 @@
         phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
       register: address_info
 
-    - name: See IP info
-      ansible.builtin.debug:
-        var: address_info['address_info'][0]['id']
-
     - name: Release the IP address
       kenmoini.phpipam.release_address:
         subnet_id: "{{ address_info['address_info'][0]['subnetId'] }}"
