@@ -31,3 +31,8 @@
         phpipam_app_id: "{{ phpipam_app_id }}"
         phpipam_app_code: "{{ phpipam_app_code }}"
         phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
+
+    - name: Set the virt_ops_ip_addr variable
+      ansible.builtin.set_stats:
+        data:
+          virt_ops_ip_addr: "{{ ip_data['ip_address'] }}"
