@@ -12,6 +12,7 @@
         phpipam_app_code: "{{ phpipam_app_code }}"
         phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
       register: address_info
+      when: ip_address is ansible.utils.ip_address
 
     - name: Release the IP address
       kenmoini.phpipam.release_address:
@@ -21,3 +22,4 @@
         phpipam_app_id: "{{ phpipam_app_id }}"
         phpipam_app_code: "{{ phpipam_app_code }}"
         phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
+      when: ip_address is ansible.utils.ip_address
