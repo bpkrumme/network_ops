@@ -22,7 +22,11 @@
         phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
       register: ip_data
 
-    - name: Show the IP
-      ansible.builtin.debug:
-        var: ip_data['ip_address']
+    - name: Set the virt_ops_ip_addr variable
+      ansible.builtin.set_stats:
+        data:
+          virt_ops_ip_addr: "{{ ip_data['ip_address'] }}"
 
+    - name: Verify set_stats is working as expected
+      ansible.builtin.debug:
+        var: virt_ops_ip_addr
