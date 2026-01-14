@@ -1,0 +1,13 @@
+---
+- name: Get the IP of a host so we can use it later
+  hosts: "{{ vm_name }}"
+  become: false
+  tasks:
+    - name: Show the IP
+      ansible.builtin.debug:
+        var: ansible_default_ipv4['address']
+        
+    - name: Set the IP variable for later
+      ansible.builtin.set_stats:
+        data:
+          ip_address: "{{ ansible_default_ipv4['address'] }}"
