@@ -1,6 +1,21 @@
+# Ansible / Automation Platform
 .logs
+logs
 *.retry
 *.vault
+/artifacts
+artifacts/
+ansible-navigator.log
+ansible.cfg
+*ansible.cfg
+.password
+.tower_cli.cfg
+.vscode
+.ansible
+clivars.yml
+vault.yml
+
+# Collections
 collections/*
 !collections/ansible_collections
 !collections/requirements.yml
@@ -8,6 +23,16 @@ collections/ansible_collections/*
 !collections/ansible_collections/bpkrumme
 collections/ansible_collections/bpkrumme/*
 !collections/ansible_collections/bpkrumme/aap_casc
+
+# Execution environment build output
+*_ee/context/
+context/
+
+# TLS / packages (execution environment builds)
+bklabca.pem
+certs
+*.rpm
+
 # https://raw.githubusercontent.com/github/gitignore/main/Python.gitignore
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -170,19 +195,5 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Ansible-specific
-.ansible
-ansible-navigator.log
-
-
-# Added to keep data private
-ansible.cfg
-vault.yml
-.password
-.tower_cli.cfg
-
-# Ignore ansible-navigator artifacts
-artifacts/
-
-#temporary
+# Temporary
 group_vars
