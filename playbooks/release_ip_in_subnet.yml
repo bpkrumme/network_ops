@@ -12,6 +12,7 @@
         phpipam_app_code: "{{ phpipam_app_code }}"
         phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
       register: address_info
+      changed_when: (address_info.ip | default([])) | length > 0
       when: ip_address is ansible.utils.ip_address
 
     - name: Release the IP address
@@ -22,4 +23,8 @@
         phpipam_app_id: "{{ phpipam_app_id }}"
         phpipam_app_code: "{{ phpipam_app_code }}"
         phpipam_skip_tls_verify: "{{ phpipam_skip_tls_verify }}"
-      when: ip_address is ansible.utils.ip_address
+      register: release_result
+      changed_when: release_result.ip_address.message | default('') == "Address deleted"
+      when:
+        - ip_address is ansible.utils.ip_address
+        - (address_info.ip | default([])) | length > 0
